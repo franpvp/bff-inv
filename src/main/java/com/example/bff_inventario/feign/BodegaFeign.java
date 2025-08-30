@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @FeignClient(
         name = "bodegaFeign",
         url = "${azure.functions.bodegas}"
@@ -16,13 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface BodegaFeign {
 
     @GetMapping("/api/bodegas")
-    BodegaDto obtenerProductosByIdBodega(@PathVariable Long id);
+    List<BodegaDto> obtenerBodegas();
+
+    @GetMapping("/api/bodegas/{id}")
+    BodegaDto obtenerProductosByIdBodega(@PathVariable("id") Long id);
 
     @PostMapping("/api/bodegas")
-    BodegaDto crearBodega(@RequestBody BodegaDto bodegaDto);
+    void crearBodega(@RequestBody BodegaDto bodegaDto);
 
     @PutMapping("/api/bodegas/{id}")
-    BodegaDto modificarDatosBodega(@RequestBody BodegaDto bodegaDto, @PathVariable("id") Long id);
+    void modificarDatosBodega(@RequestBody BodegaDto bodegaDto, @PathVariable("id") Long id);
 
     @DeleteMapping("/api/bodegas/{id}")
     void eliminarBodegaById(@PathVariable("id") Long id);

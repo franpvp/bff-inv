@@ -2,7 +2,6 @@ package com.example.bff_inventario.dto;
 
 import java.util.Objects;
 
-
 public class ProductoDto {
     private Long id;
     private String nombre;
