@@ -28,14 +28,19 @@ public class ProductoController {
         return productoFeign.obtenerProductos();
     }
 
+    @GetMapping("/{id}")
+    public ProductoDto obtenerProductoById(@PathVariable("id") Long id){
+        return productoFeign.obtenerProductoById(id);
+    }
+
     @PostMapping
-    public ProductoDto crearProducto(@RequestBody ProductoDto productoDto) {
-        return productoFeign.crearProducto(productoDto);
+    public void crearProducto(@RequestBody ProductoDto productoDto) {
+        productoFeign.crearProducto(productoDto);
     }
 
     @PutMapping("/{id}")
-    public ProductoDto modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id) {
-        return productoFeign.modificarProductoById(productoDto, id);
+    public void modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id) {
+        productoFeign.modificarProductoById(productoDto, id);
     }
 
     @DeleteMapping("/{id}")

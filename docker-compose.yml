@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  bff-inventario:
+    build: .
+    container_name: bff-inventario
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+      # URLs de las funciones de Azure que consume el BFF
+      AZURE_FUNCTIONS_PRODUCTOS: https://azure-project-1756425136823.azurewebsites.net
+      AZURE_FUNCTIONS_BODEGAS: https://bodega-funcion.azurewebsites.net
+      AZURE_FUNCTIONS_INVENTARIO: https://inventario-funcion.azurewebsites.net

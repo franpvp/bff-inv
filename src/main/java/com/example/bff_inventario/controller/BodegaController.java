@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/bodegas")
+@RequestMapping("/api/bodegas")
 public class BodegaController {
 
     private final BodegaFeign bodegaFeign;

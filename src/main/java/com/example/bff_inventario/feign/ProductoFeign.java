@@ -20,11 +20,14 @@ public interface ProductoFeign {
     @GetMapping("/api/productos")
     List<ProductoDto> obtenerProductos();
 
+    @GetMapping("/api/productos/{id}")
+    ProductoDto obtenerProductoById(@PathVariable("id") Long id);
+
     @PostMapping("/api/productos")
-    ProductoDto crearProducto(@RequestBody ProductoDto productoDto);
+    void crearProducto(@RequestBody ProductoDto productoDto);
 
     @PutMapping("/api/productos/{id}")
-    ProductoDto modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id);
+    void modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id);
 
     @DeleteMapping("/api/productos/{id}")
     void eliminarProductoById(@PathVariable("id") Long id);
