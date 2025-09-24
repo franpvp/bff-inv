@@ -11,6 +11,13 @@ public class ProductoDto {
     public ProductoDto() {
     }
 
+    public ProductoDto(Long id, String nombre, String descripcion, int precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,11 +63,13 @@ public class ProductoDto {
         return Objects.hash(id, nombre, descripcion, precio);
     }
 
-    public ProductoDto(Long id, String nombre, String descripcion, int precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
+    @Override
+    public String toString() {
+        return "ProductoDto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                '}';
     }
-
 }

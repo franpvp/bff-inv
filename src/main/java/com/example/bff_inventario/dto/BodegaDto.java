@@ -52,4 +52,13 @@ public class BodegaDto {
     public int hashCode() {
         return Objects.hash(id, nombre, direccion);
     }
+
+    @Override
+    public String toString() {
+        return "BodegaDto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
+    }
 }

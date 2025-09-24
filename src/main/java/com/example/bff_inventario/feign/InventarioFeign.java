@@ -17,18 +17,18 @@ import java.util.List;
 )
 public interface InventarioFeign {
 
-    @GetMapping("/api/inventarios")
+    @GetMapping("${spring.rutas.base.inventario}")
     List<InventarioDto> obtenerInventarios();
 
-    @GetMapping("/api/inventarios/{id}")
+    @GetMapping("${spring.rutas.base.inventario}/{id}")
     InventarioDto obtenerobtenerProductosById(@PathVariable("id") Long id);
 
-    @PostMapping("/api/inventarios")
+    @PostMapping("${spring.rutas.base.inventario}")
     void crearInventario(@RequestBody InventarioDto inventarioDto);
 
-    @PutMapping("/api/inventarios/{id}")
+    @PutMapping("${spring.rutas.base.inventario}/{id}")
     void modificarDatosInventario(@RequestBody InventarioDto inventarioDto, @PathVariable("id") Long id);
 
-    @DeleteMapping("/api/inventarios/{id}")
+    @DeleteMapping("${spring.rutas.base.inventario}/{id}")
     void eliminarInventarioById(@PathVariable("id") Long id);
 }

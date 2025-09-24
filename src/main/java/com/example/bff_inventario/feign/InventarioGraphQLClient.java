@@ -11,6 +11,6 @@ import java.util.Map;
         url  = "${azure.functions.inventarios}"
 )
 public interface InventarioGraphQLClient {
-    @PostMapping(value = "/api/graphql/inventarios", consumes = "application/json")
+    @PostMapping(value = "${spring.rutas.graphql.base.inventarios}", consumes = "application/json")
     Map<String, Object> exec(@RequestBody Map<String, Object> body);
 }

@@ -11,6 +11,6 @@ import java.util.Map;
         url  = "${azure.functions.bodegas}"
 )
 public interface BodegaGraphQLClient {
-    @PostMapping(value = "/api/graphql/bodegas", consumes = "application/json")
+    @PostMapping(value = "${spring.rutas.graphql.base.bodegas}", consumes = "application/json")
     Map<String, Object> exec(@RequestBody Map<String, Object> body);
 }

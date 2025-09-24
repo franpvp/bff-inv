@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/graphql/productos")
+@RequestMapping("${spring.rutas.graphql.base.productos}")
 public class ProductoGraphQLController {
 
     private final ProductoServiceImpl productoServiceImpl;

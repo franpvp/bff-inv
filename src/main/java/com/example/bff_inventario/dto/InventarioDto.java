@@ -62,4 +62,14 @@ public class InventarioDto {
     public int hashCode() {
         return Objects.hash(id, idProducto, cantidadProductos, idBodega);
     }
+
+    @Override
+    public String toString() {
+        return "InventarioDto{" +
+                "id=" + id +
+                ", idProducto=" + idProducto +
+                ", cantidadProductos=" + cantidadProductos +
+                ", idBodega=" + idBodega +
+                '}';
+    }
 }

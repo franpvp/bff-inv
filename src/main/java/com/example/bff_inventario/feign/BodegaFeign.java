@@ -17,18 +17,18 @@ import java.util.List;
 )
 public interface BodegaFeign {
 
-    @GetMapping("/api/bodegas")
+    @GetMapping("${spring.rutas.base.bodegas}")
     List<BodegaDto> obtenerBodegas();
 
-    @GetMapping("/api/bodegas/{id}")
+    @GetMapping("${spring.rutas.base.bodegas}/{id}")
     BodegaDto obtenerProductosByIdBodega(@PathVariable("id") Long id);
 
-    @PostMapping("/api/bodegas")
+    @PostMapping("${spring.rutas.base.bodegas}")
     void crearBodega(@RequestBody BodegaDto bodegaDto);
 
-    @PutMapping("/api/bodegas/{id}")
+    @PutMapping("${spring.rutas.base.bodegas}/{id}")
     void modificarDatosBodega(@RequestBody BodegaDto bodegaDto, @PathVariable("id") Long id);
 
-    @DeleteMapping("/api/bodegas/{id}")
+    @DeleteMapping("${spring.rutas.base.bodegas}/{id}")
     void eliminarBodegaById(@PathVariable("id") Long id);
 }

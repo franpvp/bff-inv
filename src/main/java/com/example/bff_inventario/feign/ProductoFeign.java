@@ -17,18 +17,18 @@ import java.util.List;
 )
 public interface ProductoFeign {
 
-    @GetMapping("/api/productos")
+    @GetMapping("${spring.rutas.base.productos}")
     List<ProductoDto> obtenerProductos();
 
-    @GetMapping("/api/productos/{id}")
+    @GetMapping("${spring.rutas.base.productos}/{id}")
     ProductoDto obtenerProductoById(@PathVariable("id") Long id);
 
-    @PostMapping("/api/productos")
+    @PostMapping("${spring.rutas.base.productos}")
     void crearProducto(@RequestBody ProductoDto productoDto);
 
-    @PutMapping("/api/productos/{id}")
+    @PutMapping("${spring.rutas.base.productos}/{id}")
     void modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id);
 
-    @DeleteMapping("/api/productos/{id}")
+    @DeleteMapping("${spring.rutas.base.productos}/{id}")
     void eliminarProductoById(@PathVariable("id") Long id);
 }

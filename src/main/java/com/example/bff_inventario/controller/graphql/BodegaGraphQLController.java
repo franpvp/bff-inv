@@ -3,6 +3,7 @@ package com.example.bff_inventario.controller.graphql;
 
 import com.example.bff_inventario.dto.BodegaDto;
 import com.example.bff_inventario.service.impl.BodegaServiceImpl;
+import com.example.bff_inventario.utils.Utilidad;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/graphql/bodegas")
+@RequestMapping("${spring.rutas.graphql.base.bodegas}")
 public class BodegaGraphQLController {
 
     private final BodegaServiceImpl bodegaService;
@@ -35,8 +36,9 @@ public class BodegaGraphQLController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerPorId(@PathVariable Long id) {
+        final String path = Utilidad.BASE_DIR_GRAPHQL_BODEGA + Utilidad.BASE_DIR + id;
         BodegaDto dto = bodegaService.obtenerPorId(id);
-        if (dto == null) return notFound("/graphql/bodegas/" + id, "Bodega no encontrada con ID " + id);
+        if (dto == null) return notFound(path, "Bodega no encontrada con ID " + id);
         return ResponseEntity.ok(dto);
     }
 
