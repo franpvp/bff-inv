@@ -47,7 +47,7 @@ public class InventarioController {
             return ResponseEntity.ok(
                     ResponseDto.<List<InventarioDto>>builder()
                             .status(HttpStatus.OK.value())
-                            .mensaje("Obtención de listaBodegas exitosa")
+                            .mensaje("Obtención de lista de inventarios exitosa")
                             .response(listaInventarios)
                             .build());
         } catch (FeignException e) {
@@ -125,11 +125,19 @@ public class InventarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminarInventarioById(@PathVariable("id") Long id) {
+    public ResponseEntity<ApiError> eliminarInventarioById(@PathVariable("id") Long id) {
         final String path = Utilidad.BASE_DIR_INVENTARIOS + Utilidad.BASE_DIR + id;
+
         try {
             inventarioFeign.eliminarInventarioById(id);
-            return ResponseEntity.noContent().build();
+            ApiError ok = ApiError.of(
+                    200,
+                    "OK",
+                    "Inventario con ID " + id + " eliminado correctamente.",
+                    path
+            );
+            return ResponseEntity.ok(ok);
+
         } catch (FeignException.NotFound nf) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(ApiError.of(404, "Not Found",

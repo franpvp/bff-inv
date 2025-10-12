@@ -1,11 +1,13 @@
 package com.example.bff_inventario.controller;
 
+import com.example.bff_inventario.dto.ProductoCreateResponse;
 import com.example.bff_inventario.dto.ProductoDto;
 import com.example.bff_inventario.dto.ResponseDto;
 import com.example.bff_inventario.feign.ProductoFeign;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,9 +115,23 @@ public class ProductoController {
         }
     }
 
-    @PostMapping
-    public void crearProducto(@RequestBody ProductoDto productoDto) {
-        productoFeign.crearProducto(productoDto);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> crearProducto(@RequestBody ProductoDto productoDto) {
+        try {
+            ResponseEntity<ProductoCreateResponse> backend = productoFeign.crearProducto(productoDto);
+            return ResponseEntity.status(backend.getStatusCode()).body(backend.getBody());
+        } catch (FeignException e) {
+            // Propaga 4xx/5xx con el JSON original del backend si viene
+            String json = null;
+            try { json = e.contentUTF8(); } catch (Throwable ignore) {}
+            if (json == null || json.isBlank()) {
+                json = "{\"error\":\"" + e.getMessage().replace("\"","\\\"") + "\"}";
+            }
+            HttpStatus status = HttpStatus.resolve(e.status());
+            return ResponseEntity.status(status != null ? status : HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(json);
+        }
     }
 
     @PutMapping("/{id}")

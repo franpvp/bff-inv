@@ -1,7 +1,9 @@
 package com.example.bff_inventario.feign;
 
+import com.example.bff_inventario.dto.ProductoCreateResponse;
 import com.example.bff_inventario.dto.ProductoDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +26,7 @@ public interface ProductoFeign {
     ProductoDto obtenerProductoById(@PathVariable("id") Long id);
 
     @PostMapping("${spring.rutas.base.productos}")
-    void crearProducto(@RequestBody ProductoDto productoDto);
+    ResponseEntity<ProductoCreateResponse> crearProducto(@RequestBody ProductoDto productoDto);
 
     @PutMapping("${spring.rutas.base.productos}/{id}")
     void modificarProductoById(@RequestBody ProductoDto productoDto, @PathVariable("id") Long id);
